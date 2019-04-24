@@ -11,7 +11,7 @@
         --secoundary-color: var(--secoundary-color-task-element, #ffffff);
       }
 
-      .task-element {
+      .task {
         color: var(--primary-color);
         display: flex;
         align-items: center;
@@ -21,7 +21,7 @@
         margin-left: 5px;
       }
     </style>
-    <div class="task-element">
+    <div class="task">
       <iron-icon icon="radio-button-checked" class="bullet"></iron-icon>
       <span class="text">[[taskDescription]]</span>
     </div>
@@ -35,8 +35,32 @@
           taskDescription: {
             type: String,
             value: 'Task description'
+          },
+          done: {
+            type: Boolean,
+            value: false
+          },
+          canceled: {
+            type: Boolean,
+            value: false
+          },
+          status: {
+            type: String,
+            computed: 'getStatus(done, canceled)'
           }
         };
+      }
+
+      getStatus(done, canceled) {
+        let result = 'task';
+
+        if (done) {
+          result +=' done';
+        } else if (canceled) {
+          result +=' canceled'
+        }
+
+        return result;
       }
     }
 

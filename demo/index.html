@@ -22,8 +22,19 @@
       <h3>Basic task-element demo</h3>
       <demo-snippet>
         <template>
-          <task-element task-description="Learn Polymer 2"></task-element>
+          <task-element id="task1" task-description="Learn Polymer 2"></task-element>
+          <task-element id="task2" done task-description="Learn English"></task-element>
+          <task-element id="task3" canceled task-description="X-wing drive license"></task-element>
         </template>
+        <script>
+          const task1 = document.getElementById('task1');
+          const task2 = document.getElementById('task2');
+          const task3 = document.getElementById('task3');
+
+          console.log('Task 1 status: ', task1.status);
+          console.log('Task 2 status: ', task2.status);
+          console.log('Task 3 status: ', task3.status);
+        </script>
       </demo-snippet>
     </div>
   </body>
