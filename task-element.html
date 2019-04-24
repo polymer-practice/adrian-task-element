@@ -1,31 +1,40 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
 
 <dom-module id="task-element">
   <template>
     <style>
       :host {
         display: block;
+        --primary-color: var(--primary-color-task-element, #3f51b5);
+        --secoundary-color: var(--secoundary-color-task-element, #ffffff);
+      }
+
+      .task-element {
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .text {
+        margin-left: 5px;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <div class="task-element">
+      <iron-icon icon="radio-button-checked" class="bullet"></iron-icon>
+      <span class="text">[[taskDescription]]</span>
+    </div>
   </template>
 
   <script>
-    /**
-     * `task-element`
-     * 
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
     class TaskElement extends Polymer.Element {
       static get is() { return 'task-element'; }
       static get properties() {
         return {
-          prop1: {
+          taskDescription: {
             type: String,
-            value: 'task-element'
+            value: 'Task description'
           }
         };
       }
