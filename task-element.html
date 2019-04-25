@@ -20,8 +20,18 @@
       .text {
         margin-left: 5px;
       }
+
+      .done {
+        color: green;
+        text-decoration: line-through;
+      }
+
+      .canceled {
+        color: red;
+        text-decoration: line-through;
+      }
     </style>
-    <div class="task">
+    <div class$="[[status]]">
       <iron-icon icon="radio-button-checked" class="bullet"></iron-icon>
       <span class="text">[[taskDescription]]</span>
     </div>
