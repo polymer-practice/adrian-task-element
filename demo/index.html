@@ -22,18 +22,27 @@
       <h3>Basic task-element demo</h3>
       <demo-snippet>
         <template>
-          <task-element id="task1" task-description="Learn Polymer 2"></task-element>
-          <task-element id="task2" done task-description="Learn English"></task-element>
-          <task-element id="task3" canceled task-description="X-wing drive license"></task-element>
+          <task-element id="task1" key="1" task-description="Learn Polymer 2"></task-element>
+          <task-element id="task2" key="2" done task-description="Learn English"></task-element>
+          <task-element id="task3" key="3" canceled task-description="X-wing drive license"></task-element>
         </template>
         <script>
           const task1 = document.getElementById('task1');
           const task2 = document.getElementById('task2');
           const task3 = document.getElementById('task3');
 
-          console.log('Task 1 status: ', task1.status);
-          console.log('Task 2 status: ', task2.status);
-          console.log('Task 3 status: ', task3.status);
+          task1.addEventListener('pending', (event) => { console.log('Task 1 event pending: ', event); });
+          task1.addEventListener('done', (event) => { console.log('Task 1 event done: ', event); });
+          task1.addEventListener('cancel', (event) => { console.log('Task 1 event cancel: ', event); });
+
+          task2.addEventListener('pending', (event) => { console.log('Task 2 event pending: ', event); });
+          task2.addEventListener('done', (event) => { console.log('Task 2 event done: ', event); });
+          task2.addEventListener('cancel', (event) => { console.log('Task 2 event cancel: ', event); });
+
+          task3.addEventListener('pending', (event) => { console.log('Task 3 event pending: ', event); });
+          task3.addEventListener('done', (event) => { console.log('Task 3 event done: ', event); });
+          task3.addEventListener('cancel', (event) => { console.log('Task 3 event cancel: ', event); });
+
         </script>
       </demo-snippet>
     </div>

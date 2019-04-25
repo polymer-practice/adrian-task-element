@@ -9,9 +9,16 @@
         display: block;
         --primary-color: var(--primary-color-task-element, #3f51b5);
         --secoundary-color: var(--secoundary-color-task-element, #ffffff);
+        --width-element: var(--width-element-task-element, 200px);
       }
 
+      .container-task {
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+      }
       .task {
+        width: var(--width-element);
         color: var(--primary-color);
         display: flex;
         align-items: center;
@@ -30,10 +37,42 @@
         color: red;
         text-decoration: line-through;
       }
+
+      .btn {
+        background-color: var(--primary-color);
+        color: var(--secoundary-color);
+        width: 70px;
+        height: 30px;
+        border-radius: 5px;
+      }
+
+      .do {
+        background-color: green;
+      }
+
+      .cancel {
+        background-color: red;
+      }
+
+      @media(min-width: 600px) {
+        .container-task {
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+        }
+      }
+    
     </style>
-    <div class$="[[status]]">
-      <iron-icon icon="radio-button-checked" class="bullet"></iron-icon>
-      <span class="text">[[taskDescription]]</span>
+    <div class="container-task">
+      <div class$="[[status]]">
+          <iron-icon icon="radio-button-checked" class="bullet"></iron-icon>
+          <span class="text">[[taskDescription]]</span>
+      </div>
+      <div class="buttons-set">
+        <button type="button" name="pending" on-click="onClickButton" class="btn pending">Pending</button>
+        <button type="button" name="done" on-click="onClickButton" class="btn do">Done</button>
+        <button type="button" name="cancel" on-click="onClickButton" class="btn cancel">Cancel</button>
+      </div>
     </div>
   </template>
 
@@ -42,6 +81,7 @@
       static get is() { return 'task-element'; }
       static get properties() {
         return {
+          key: String,
           taskDescription: {
             type: String,
             value: 'Task description'
@@ -59,6 +99,22 @@
             computed: 'getStatus(done, canceled)'
           }
         };
+      }
+
+      onClickButton(event) {
+        let eventName = event.target.name;
+        let myEvent = new CustomEvent(
+          eventName,
+          {
+            bubbles: true,
+            composed: true,
+            detail: {
+              key: this.key
+            }
+          }
+        );
+
+        this.dispatchEvent(myEvent);
       }
 
       getStatus(done, canceled) {
